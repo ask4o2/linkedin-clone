@@ -4,7 +4,7 @@
   align-items: center;
   color: gray;
   cursor: pointer;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .headerOption:hover {
@@ -12,10 +12,17 @@
 }
 
 .headerOption__title {
-  font-weight: 400;
+  font-weight: 200;
+  font-size: 12px;
 }
 .headerOption__icon {
   object-fit: contain;
   height: 25px !important;
   width: 25px !important;
+}
+
+@media (max-width: 567px) {
+  .headerOption__title {
+    font-size: 11px;
+  }
 }

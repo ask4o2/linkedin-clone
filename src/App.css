@@ -1,10 +1,8 @@
 .app {
+  /* width: 100vw; */
   margin: 0;
   padding: 0;
   background-color: #f3f2ef;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .app__body {
@@ -13,4 +11,10 @@
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (max-width: 576px) {
+  .app__body {
+    flex-direction: column;
+  }
 }

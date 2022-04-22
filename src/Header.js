@@ -10,15 +10,16 @@ import {
 import { auth } from "./firebase";
 import { signOut } from "firebase/auth";
 import HeaderOption from "./HeaderOption";
-import { connect } from "react-redux";
-import { logout } from "./actions/actions";
+import { getUser, logout } from "./store/appSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-function Header(props) {
-  const user = props.user;
+function Header() {
+  const user = useSelector(getUser);
+  const dispatch = useDispatch();
 
   const logoutOfApp = () => {
-    props.logout();
     signOut(auth);
+    dispatch(logout());
   };
 
   return (
@@ -28,10 +29,12 @@ function Header(props) {
           src="https://play-lh.googleusercontent.com/kMofEFLjobZy_bCuaiDogzBcUT-dz3BBbOrIEjJ-hqOabjK8ieuevGe6wlTD15QzOqw"
           alt=""
         />
-        <div className="header__search">
-          <Search />
-          <input type="text" placeholder="Search" />
-        </div>
+        {user && (
+          <div className="header__search">
+            <Search />
+            <input type="text" placeholder="Search" />
+          </div>
+        )}
       </div>
 
       <div className="header__right">
@@ -40,16 +43,10 @@ function Header(props) {
         <HeaderOption title="Jobs" Icon={BusinessCenter} />
         <HeaderOption title="Messaging" Icon={Chat} />
         <HeaderOption title="Notifications" Icon={Notifications} />
-        {user && (
-          <HeaderOption onClick={logoutOfApp} avatar={true} title="Me" />
-        )}
       </div>
+      {user && <HeaderOption onClick={logoutOfApp} avatar={true} />}
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
-export default connect(mapStateToProps, { logout })(Header);
+export default Header;

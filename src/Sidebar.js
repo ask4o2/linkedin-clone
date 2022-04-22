@@ -1,9 +1,10 @@
 import { Avatar } from "@mui/material";
 import "./Sidebar.css";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import { getUser } from "./store/appSlice";
 
-function Sidebar(props) {
-  const user = props.user;
+function Sidebar() {
+  const user = useSelector(getUser);
 
   const recentItem = (topic) => (
     <div className="sidebar__recentItem">
@@ -49,8 +50,4 @@ function Sidebar(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
-export default connect(mapStateToProps, null)(Sidebar);
+export default Sidebar;

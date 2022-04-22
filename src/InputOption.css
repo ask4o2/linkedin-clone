@@ -10,7 +10,8 @@
   background-color: whitesmoke;
   border-radius: 10px;
 }
-.inputOption > h4 {
+.inputOption > h5 {
   margin-left: 5px;
-  font-size: 13px;
+  margin-bottom: 0 !important;
+  font-size: small;
 }

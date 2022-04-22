@@ -18,13 +18,15 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "./firebase";
-// import Spinner from "./Spinner";
-import { connect } from "react-redux";
+import Spinner from "./Spinner";
+import { useSelector } from "react-redux";
+import { getUser } from "./store/appSlice";
 // import FlipMove from "react-flip-move";
 
-function Feed({ user }) {
+function Feed() {
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState("");
+  const user = useSelector(getUser);
 
   useEffect(() => {
     const postsQuery = query(
@@ -49,13 +51,23 @@ function Feed({ user }) {
     setInput("");
   };
 
-  // let postContent;
+  let postContent;
 
-  // if (Object.keys(posts).length < 1) {
-  //   postContent = <Spinner />;
-  // } else {
-  //   postContent =
-  // }
+  if (Object.keys(posts).length < 1) {
+    postContent = <Spinner />;
+  } else {
+    postContent = posts.map(
+      ({ id, data: { name, description, message, photoUrl } }) => (
+        <Post
+          key={id}
+          name={name}
+          description={description}
+          message={message}
+          photoUrl={photoUrl}
+        />
+      )
+    );
+  }
 
   return (
     <div className="feed">
@@ -78,7 +90,7 @@ function Feed({ user }) {
           <InputOption title="Video" Icon={Subscriptions} color="#7fc15e" />
           <InputOption title="Event" Icon={EventNote} color="#e7a33e" />
           <InputOption
-            title="Wite Article"
+            title=" Article"
             Icon={CalendarViewDay}
             color="#fc9295"
           />
@@ -86,21 +98,9 @@ function Feed({ user }) {
       </div>
 
       {/* posts */}
-      {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
-        <Post
-          key={id}
-          name={name}
-          description={description}
-          message={message}
-          photoUrl={photoUrl}
-        />
-      ))}
+      {postContent}
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
-export default connect(mapStateToProps)(Feed);
+export default Feed;

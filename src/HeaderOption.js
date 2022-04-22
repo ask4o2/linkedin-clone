@@ -1,8 +1,10 @@
 import { Avatar } from "@mui/material";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import "./HeaderOption.css";
+import { getUser } from "./store/appSlice";
 
-function HeaderOption({ title, Icon, avatar, onClick, user }) {
+function HeaderOption({ title, Icon, avatar, onClick }) {
+  const user = useSelector(getUser);
   return (
     <div onClick={onClick} className="headerOption">
       {Icon && <Icon className="headerOption__icon" />}
@@ -11,13 +13,9 @@ function HeaderOption({ title, Icon, avatar, onClick, user }) {
           {user?.email[0]}
         </Avatar>
       )}
-      <h6 className="headerOption__title">{title}</h6>
+      {title && <h6 className="headerOption__title">{title}</h6>}
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
-export default connect(mapStateToProps)(HeaderOption);
+export default HeaderOption;

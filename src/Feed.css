@@ -29,12 +29,20 @@
   flex: 1;
   margin-left: 30px;
   outline-width: 0;
-  font-weight: 600;
+  font-weight: 500;
 }
 .feed__input > form > button {
   display: none;
 }
 .feed__inputOptions {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+}
+
+@media (max-width: 567px) {
+  .feed {
+    flex: 1;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

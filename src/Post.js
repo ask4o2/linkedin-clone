@@ -1,15 +1,15 @@
 import { Avatar } from "@mui/material";
 import { Chat, Send, Share, ThumbUpAlt } from "@mui/icons-material";
 import React from "react";
-import { connect } from "react-redux";
+// import { useSelector } from "react-redux";
 import InputOption from "./InputOption";
 import "./Post.css";
 
-const Post = ({ name, description, photoUrl, message, user }) => {
+const Post = ({ name, description, photoUrl, message }) => {
   return (
     <div className="post">
       <div className="post__header">
-        <Avatar>{photoUrl}</Avatar>
+        <Avatar src={photoUrl}> {description[0]} </Avatar>
         <div className="post__info">
           <h2>{name}</h2>
           <p>{description}</p>
@@ -27,8 +27,5 @@ const Post = ({ name, description, photoUrl, message, user }) => {
     </div>
   );
 };
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
 
-export default connect(mapStateToProps)(Post);
+export default Post;

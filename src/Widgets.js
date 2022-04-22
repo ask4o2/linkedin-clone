@@ -23,9 +23,9 @@ function Widgets() {
         <Info />
       </div>
 
-      {newsArticle("Papa React is back ", "top news- 889 readers")}
-      {newsArticle("Papa React is back ", "top news- 889 readers")}
-      {newsArticle("Papa React is back ", "top news- 889 readers")}
+      {newsArticle("LinkedIn is hiring ", "top news- 889 readers")}
+      {newsArticle("MBA scholarship now available ", "top news- 285 readers")}
+      {newsArticle("The DevOps Conference ", "top news- 681 readers")}
     </div>
   );
 }
